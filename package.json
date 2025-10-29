@@ -1,0 +1,18 @@
+{
+  "name": "luana-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "deploy-commands": "node utils/deploy-commands.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "Bot Luana - Assistente de IA intelectual, reflexiva e analítica, baseado na conversão do projeto From Flow.",
+  "dependencies": {
+    "better-sqlite3": "^12.4.1",
+    "discord.js": "^14.24.1",
+    "dotenv": "^17.2.3"
+  }
+}

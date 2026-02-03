@@ -113,12 +113,19 @@ if (process.env.DISCORD_TOKEN) {
     console.log('[BOT] Tentando logar no Discord...');
     client.login(process.env.DISCORD_TOKEN).catch(err => {
         console.error('[ERRO] Falha no login do Discord:', err.message);
-        if (err.message.includes('TOKEN_INVALID')) {
-            console.error('DICA: Seu DISCORD_TOKEN está incorreto ou expirou.');
+        if (err.message.includes('Used disallowed intents')) {
+            console.error('--- AJUDA CRÍTICA ---');
+            console.error('Você precisa ativar "Message Content Intent" no Discord Developer Portal.');
+            console.error('1. Vá em https://discord.com/developers/applications');
+            console.error('2. Vá em Bot -> Privileged Gateway Intents');
+            console.error('3. Ative: Presence, Server Members e Message Content.');
+            console.error('4. Salve as alterações.');
+        } else if (err.message.includes('TOKEN_INVALID')) {
+            console.error('DICA: Seu DISCORD_TOKEN está incorreto.');
         }
     });
 } else {
-    console.error('[ERRO] DISCORD_TOKEN não encontrado. O bot NÃO entrará online via Gateway.');
+    console.error('[ERRO] DISCORD_TOKEN não encontrado.');
 }
 
 // Anti-crash

@@ -8,12 +8,52 @@ const express = require('express');
 // Carrega variáveis de ambiente
 dotenv.config();
 
-// --- Servidor Web para Render (Keep-Alive) ---
+// --- Servidor Web para Render (Keep-Alive e Webhooks) ---
+const { InteractionType, InteractionResponseType, verifyKeyMiddleware } = require('discord-interactions');
+
+if (!process.env.PUBLIC_KEY) {
+    console.warn('[AVISO] PUBLIC_KEY não definida. O endpoint de interações não funcionará corretamente.');
+}
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
     res.send('Bot is online!');
+});
+
+// Endpoint de Interações (HTTP Webhook)
+// Nota: Para usar isso no portal do Discord, você precisa definir PUBLIC_KEY no .env
+app.post('/api/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY || ''), (req, res) => {
+    const interaction = req.body;
+
+    if (interaction.type === InteractionType.PING) {
+        return res.send({ type: InteractionResponseType.PONG });
+    }
+
+    if (interaction.type === InteractionType.APPLICATION_COMMAND) {
+        // Nota: Processar comandos aqui requer lógica diferente do Gateway.
+        // Para que o bot responda via HTTP, o código abaixo é o básico.
+        console.log(`[HTTP] Comando recebido via Webhook: ${interaction.data.name}`);
+        return res.status(200).send({
+            type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+            data: { content: 'Interação recebida via Webhook!' }
+        });
+    }
+});
+
+// Linked Roles Verification URL
+app.get('/verify-user', (req, res) => {
+    res.send('Página de Verificação de Usuário (Linked Roles). Em desenvolvimento.');
+});
+
+// Termos de Serviço e Privacidade
+app.get('/terms-of-service', (req, res) => {
+    res.send('<h1>Termos de Serviço</h1><p>Conteúdo dos termos de serviço...</p>');
+});
+
+app.get('/privacy-policy', (req, res) => {
+    res.send('<h1>Política de Privacidade</h1><p>Página de política de privacidade...</p>');
 });
 
 app.listen(PORT, () => {
@@ -76,6 +116,11 @@ if (fs.existsSync(eventsPath)) {
 }
 
 // --- Inicialização ---
+if (!process.env.DISCORD_TOKEN) {
+    console.error('[ERRO] DISCORD_TOKEN não definido nas variáveis de ambiente.');
+    process.exit(1);
+}
+
 client.login(process.env.DISCORD_TOKEN);
 
 // Anti-crash

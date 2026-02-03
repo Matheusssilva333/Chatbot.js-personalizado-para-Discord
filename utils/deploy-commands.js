@@ -16,7 +16,13 @@ for (const file of commandFiles) {
     }
 }
 
-const rest = new REST().setToken(process.env.DISCORD_TOKEN);
+const token = process.env.DISCORD_TOKEN;
+if (!token) {
+    console.error('Erro: DISCORD_TOKEN não encontrado no arquivo .env');
+    process.exit(1);
+}
+
+const rest = new REST().setToken(token);
 
 (async () => {
     try {

@@ -105,4 +105,39 @@ Para trocar para MongoDB, você precisaria:
 3.  Criar um novo arquivo (ex: `database/mongo-manager.js`) e reescrever as funções `getUserContext` e `saveUserContext` usando `mongoose` ou o driver nativo.
 4.  No `index.js`, alterar a linha `client.db = require('./database/sqlite-manager');` para carregar o novo módulo.
 
-A arquitetura modular facilita essa troca, pois a lógica do bot (`messageCreate.js`) só interage com os métodos (`getUserContext`, `saveUserContext`), e não com a implementação interna do banco.
+## ☁️ Deploy no Render
+
+Este projeto está configurado para deploy fácil no **Render**.
+
+### Passos para Deploy:
+
+1.  **Crie um Web Service** no Render.
+2.  **Conecte seu repositório GitHub**.
+3.  **Configurações Importantes**:
+    *   **Runtime**: `Node`
+    *   **Build Command**: `npm install && npm run build` (Isso instalará as dependências e registrará os comandos Slash).
+    *   **Start Command**: `npm start`
+4.  **Variáveis de Ambiente (Environment Variables)**:
+    *   `DISCORD_TOKEN`: Seu token do bot.
+    *   `CLIENT_ID`: ID do seu aplicativo bot.
+    *   `PORT`: 3000 (O Render preenche isso automaticamente, mas é bom garantir).
+
+### ⚠️ Nota sobre Persistência (SQLite)
+O Render utiliza um Sistema de Arquivos Efêmero no Plano Gratuito. Isso significa que **seu banco de dados SQLite será resetado toda vez que o bot reiniciar ou entrar em modo de espera**. 
+*   Para manter os dados, use um **Persistent Disk** (pago) no Render.
+*   Alternativamente, migre para um banco de dados externo como **MongoDB (Atlas)** ou **Postgres (Supabase/Neon)**.
+
+### 🔋 Mantendo o Bot Online 24/7
+No plano gratuito do Render, o serviço entra em standby após 15 minutos de inatividade. Para evitar que o bot fique offline:
+### 🔗 URLs de Configuração (Portal do Discord)
+
+Para configurar as opções avançadas no [Discord Developer Portal](https://discord.com/developers/applications):
+
+*   **Interactions Endpoint URL**: `https://seu-app.onrender.com/api/interactions`
+    *   *(Necessário adicionar `PUBLIC_KEY` no seu .env/Render)*
+*   **Linked Roles Verification URL**: `https://seu-app.onrender.com/verify-user`
+*   **Terms of Service URL**: `https://seu-app.onrender.com/terms-of-service`
+*   **Privacy Policy URL**: `https://seu-app.onrender.com/privacy-policy`
+
+---
+

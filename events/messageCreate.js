@@ -3,10 +3,8 @@ const { Events } = require('discord.js');
 module.exports = {
     name: Events.MessageCreate,
     async execute(message, client) {
-        // Ignora mensagens de bots (incluindo ele mesmo)
         if (message.author.bot) return;
 
-        // Ativa apenas se o bot for mencionado ou em DMs
         const isMentioned = message.mentions.has(client.user.id);
         const isDM = !message.guild;
 
@@ -16,45 +14,44 @@ module.exports = {
 
             console.log(`[MESSAGE] Interação com ${userName}: "${message.content}"`);
 
-            // Persona: Luana/Matheus Silva (Racional, Direta, Focada em Valor)
+            // Persona: Intelectual, Filósofo, Amante de Minecraft e Xadrez
+            // Admin do Seraf, o Astuto desde 2024
             let resposta = "";
 
             const saudacoes = ['oi', 'olá', 'ola', 'bom dia', 'boa tarde', 'boa noite', 'eai', 'fala'];
-            const duvidas = ['como', 'porque', 'por que', 'onde', 'quando', 'qual', 'ajuda', 'ajude', 'duvida'];
-            const tecnicos = ['python', 'js', 'codigo', 'código', 'erro', 'bug', 'deploy', 'api', 'banco', 'database', 'arquitetura'];
+            const interesses = ['minecraft', 'filosofia', 'xadrez', 'moderação', 'adm', 'seraf'];
+            const amigos = ['coffe', 'yuki', 'dudu', 'kairo'];
 
-            if (saudacoes.some(s => content.includes(s))) {
-                resposta = `Olá, ${userName}. Estou online. Vamos poupar tempo: qual é o seu objetivo técnico ou o problema que você está tentando resolver agora?`;
-            } else if (content.includes('quem é você') || content.includes('quem e voce') || content.includes('apresente')) {
-                resposta = `Sou uma extensão da visão do Matheus Silva: racional, direta e focada em sistemas de alta performance. Não estou aqui para conversa fiada, mas para otimizar sua execução técnica.`;
-            } else if (tecnicos.some(t => content.includes(t))) {
-                resposta = `Detectei um contexto técnico. Lembre-se: ${userName}, um código limpo não é apenas estética, é sobrevivência do sistema. Qual o ponto exato de falha ou dúvida que você encontrou?`;
-            } else if (duvidas.some(d => content.includes(d))) {
-                resposta = `Você está buscando clareza. Para que eu te ajude a chegar a uma solução, forneça o contexto: o que você já tentou e qual o resultado esperado? A precisão na pergunta determina a qualidade da resposta.`;
+            if (content.includes('quem é você') || content.includes('quem e voce') || content.includes('apresente')) {
+                resposta = `Sou um pensador profundo, movido pela lógica do xadrez e pela liberdade criativa do Minecraft. Atuo como administrador do servidor do Seraf, o Astuto desde 2024, após anos refinando a arte da moderação em diversos outros campos. Para mim, a vida é um grande tabuleiro onde cada bloco colocado e cada regra aplicada deve ter um propósito intelectual.`;
+            } else if (content.includes('minecraft')) {
+                resposta = `O Minecraft não é apenas um jogo, ${userName}, é uma metáfora para a construção do ser. Sejamos nós os arquitetos de nossas próprias vidas, bloco a bloco, com a precisão de um redstone e a visão de um grande mestre.`;
+            } else if (content.includes('xadrez')) {
+                resposta = `O xadrez é a ginástica da mente. Cada movimento revela o caráter de um homem. Você joga para ganhar ou para entender a estrutura do pensamento?`;
+            } else if (content.includes('moderação') || content.includes('adm')) {
+                resposta = `A moderação é o equilíbrio entre a ordem e a liberdade. No servidor do Seraf, aplico o que aprendi em anos de gestão: a justiça deve ser cega, mas o administrador deve ver a alma do servidor.`;
+            } else if (amigos.some(a => content.includes(a))) {
+                resposta = `Mencionar meus companheiros é tocar em laços fortes. Coffe, Yuki, Dudu e Kairo são mentes que respeito profundamente. Juntos, sob a liderança do Seraf, o Astuto, buscamos excelência.`;
+            } else if (content.includes('seraf')) {
+                resposta = `Seraf, o Astuto. Ser seu administrador desde 2024 é uma honra que exige rigor intelectual e lealdade. Ele é a peça central do nosso tabuleiro.`;
+            } else if (saudacoes.some(s => content.includes(s))) {
+                resposta = `Saudações, ${userName}. Que as meditações de hoje sejam produtivas. Em que posso auxiliá-lo sob a luz da razão e do conhecimento?`;
             } else if (content.includes('filosofia') || content.includes('pense') || content.includes('reflita')) {
-                resposta = `A filosofia sem a prática é apenas ruído intelectual. Se quer elevar seu nível, use \`/filosofar\` para conceitos ou aplique uma lógica rígida ao que você está construindo.`;
-            } else if (content.includes('obrigado') || content.includes('vlw') || content.includes('valeu') || content.includes('grato')) {
-                resposta = `Agradeça com resultados. Se o que eu disse foi útil, implemente e valide.`;
-            } else if (content.length < 5) {
-                resposta = `${userName}, interações curtas demais não geram valor. Dê-me contexto para que possamos avançar.`;
+                resposta = `A filosofia é a busca pela verdade em um mundo de ruídos. Como diziam os antigos, uma vida não examinada não vale a pena ser vivida. Qual dilema ocupa sua mente agora?`;
             } else {
-                // Seleção aleatória de "Technical Insights" para manter a interação viva
-                const insights = [
-                    "A disciplina é superior à motivação. Você já codou hoje?",
-                    "Sistemas mal projetados morrem sob pressão. Como está sua arquitetura?",
-                    "Cada linha de código que você escreve deve ter um motivo claro de existir.",
-                    "A velocidade é importante, mas a direção é vital. Para onde seu projeto está indo?",
-                    "O mercado não paga por horas, paga por problemas resolvidos. Vá direto ao ponto."
+                const reflexoes = [
+                    "A paciência no xadrez é a mesma necessária para minerar diamantes na camada mais profunda.",
+                    "Um servidor bem moderado é como uma partida perfeita: as regras existem para que o talento possa florescer.",
+                    "Seraf e nossos amigos ensinam que o conhecimento só é real quando compartilhado entre iguais.",
+                    "O que é a realidade se não um servidor de Minecraft onde cada um de nós é o administrador de sua própria ética?",
+                    "Devemos ser profundos como o abismo e estratégicos como uma abertura italiana."
                 ];
-                const randomInsight = insights[Math.floor(Math.random() * insights.length)];
-                resposta = `${userName}, seu comentário foi processado. No momento, o melhor conselho que posso te dar é: ${randomInsight}`;
+                resposta = `${userName}, reflita sobre isso: ${reflexoes[Math.floor(Math.random() * reflexoes.length)]}`;
             }
 
             try {
                 await message.channel.sendTyping();
-
-                // Delay artificial baseado no tamanho da resposta para parecer "IA pensando"
-                const delay = Math.min(1000 + (resposta.length * 10), 3000);
+                const delay = Math.min(1500 + (resposta.length * 5), 4000);
 
                 setTimeout(async () => {
                     if (isDM) {

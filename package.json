@@ -13,6 +13,10 @@
   "dependencies": {
     "better-sqlite3": "^12.4.1",
     "discord.js": "^14.24.1",
-    "dotenv": "^17.2.3"
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

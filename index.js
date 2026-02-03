@@ -58,6 +58,19 @@ app.get('/privacy-policy', (req, res) => {
 
 app.listen(PORT, () => {
     console.log(`[HTTP] Servidor ouvindo na porta ${PORT}`);
+
+    // Auto-ping para manter o bot online no Render (evita hibernação)
+    const RENDER_EXTERNAL_URL = process.env.RENDER_EXTERNAL_URL;
+    if (RENDER_EXTERNAL_URL) {
+        setInterval(() => {
+            const https = require('https');
+            https.get(RENDER_EXTERNAL_URL, (res) => {
+                console.log(`[PING] Auto-ping enviado para ${RENDER_EXTERNAL_URL} - Status: ${res.statusCode}`);
+            }).on('error', (err) => {
+                console.error('[PING] Erro no auto-ping:', err.message);
+            });
+        }, 840000); // 14 minutos (Render hiberna após 15)
+    }
 });
 
 // --- Configuração do Cliente Discord ---

@@ -7,12 +7,20 @@ const express = require('express');
 
 dotenv.config();
 
-// --- Servidor Web para Render ---
+// --- Servidor Web para Monitoramento (Keep-Alive) ---
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
-    res.send('A estrutura analítica da Luana está ativa e operacional.');
+    res.status(200).send({
+        status: 'online',
+        timestamp: new Date().toISOString(),
+        message: 'A estrutura analítica da Luana está ativa e operacional.'
+    });
+});
+
+app.get('/health', (req, res) => {
+    res.status(200).send('OK');
 });
 
 app.listen(PORT, () => {
@@ -68,4 +76,38 @@ if (process.env.DISCORD_TOKEN) {
     console.error('[ERRO] Ausência de DISCORD_TOKEN no ambiente.');
 }
 
-process.on('unhandledRejection', error => console.error('Abstração de erro não tratada:', error));
+// --- Sistema Anti-Queda (Error Handling) ---
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('[ANTI-CRASH] Rejeição não tratada em:', promise, 'razão:', reason);
+});
+
+process.on('uncaughtException', (err, origin) => {
+    console.error(`[ANTI-CRASH] Exceção não tratada: ${err}\n` + `Origem: ${origin}`);
+});
+
+process.on('uncaughtExceptionMonitor', (err, origin) => {
+    console.error(`[ANTI-CRASH] Monitor de Exceção: ${err}\n` + `Origem: ${origin}`);
+});
+
+// --- Sistema Keep-Alive (Para o Render não dormir) ---
+const keepAlive = () => {
+    // Render fornece RENDER_EXTERNAL_URL automaticamente para Web Services
+    const url = process.env.RENDER_EXTERNAL_URL;
+
+    if (url) {
+        console.log(`[KEEP-ALIVE] Monitoramento configurado para: ${url}`);
+        setInterval(async () => {
+            try {
+                const response = await fetch(url);
+                const currentTime = new Date().toLocaleTimeString('pt-BR');
+                console.log(`[KEEP-ALIVE] [${currentTime}] Ping realizado. Status: ${response.status}`);
+            } catch (err) {
+                console.error(`[KEEP-ALIVE] Falha ao pingar em ${url}:`, err.message);
+            }
+        }, 840000); // 14 minutos
+    } else {
+        console.log('[KEEP-ALIVE] RENDER_EXTERNAL_URL não detectada. Pulando auto-ping (ambiente local?).');
+    }
+};
+
+keepAlive();

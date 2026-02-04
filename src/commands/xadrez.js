@@ -18,9 +18,9 @@ module.exports = {
         let resposta = "";
 
         if (subcommand === 'dicas') {
-            resposta = "A fundação de uma boa partida reside no controle do centro e no desenvolvimento harmônico das peças. Analise as linhas de tensão: cada peão movido é uma concessão estrutural definitiva. Estude finais antes de se perder em aberturas complexas.";
+            resposta = "Dica de xadrez? Ah mano. Move as peças e ganha. Eu era foda, mas parei. KKKKKKKK";
         } else if (subcommand === 'carlsen') {
-            resposta = "Magnus Carlsen representa o ápice da precisão posicional. Sua genialidade não reside apenas no cálculo bruto, mas na intuição técnica de simplificar posições complexas onde ele detém vantagens microscópicas, forçando o oponente ao erro sob pressão constante.";
+            resposta = "Magnus Carlsen... joga bem. Mas eu sou um lógico fodido. Se eu quisesse... ah deixa pra lá, morguei.";
         }
 
         await interaction.reply({ content: enrich(resposta) });

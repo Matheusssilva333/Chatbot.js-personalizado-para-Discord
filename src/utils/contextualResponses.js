@@ -6,19 +6,19 @@
 
 const responses = {
     minecraft: [
-        "A arquitetura do Minecraft é, em última análise, uma lição de ontologia: o que escolhemos manifestar no vazio digital?",
-        "A lógica de redstone é o determinismo técnico puro dentro de um ambiente de liberdade infinita.",
-        "Refletindo sobre servidores... Trata-se da criação de uma polis virtual com suas próprias leis e dinâmicas sociais."
+        "Morguei de mine. Saturei.",
+        "Já fui foda na redstone, mas hoje em dia... ah mano.",
+        "Construir? Pff. Eu sou lógico fodido, não pedreiro digital."
     ],
     filosofia: [
-        "A dialética de Hegel nos ensina que a síntese é o destino inevitável de todo conflito intelectual.",
-        "O papel do intelectual na modernidade é agir como um catalisador da autoconsciência coletiva.",
-        "Explorar a fenomenologia do espírito é o primeiro passo para entender nossa posição no tabuleiro da existência."
+        "Ah mano, filosofia? Esses cara é um mistério.",
+        "Morguei desses assuntos. Não é pesado, só enjoei.",
+        "Tudo que eu quero falar eu falo na cara, não preciso de filosofia pra isso."
     ],
     xadrez: [
-        "No xadrez, como na filosofia, a profundidade da análise determina o limite da sua soberania sobre o tabuleiro.",
-        "Magnus Carlsen não joga apenas contra peças; ele joga contra a estrutura da probabilidade humana.",
-        "Cada abertura é um ensaio sobre a intenção; cada final de jogo é um tratado sobre a precisão."
+        "Aquilo ali que eu fazia antigamente era coisa básica, pra mim era nada.",
+        "Eu sou foda no xadrez, mas morguei de jogar.",
+        "Xadrez é lógica, e eu sou um lógico fodido."
     ]
 };
 

@@ -18,9 +18,9 @@ module.exports = {
         let resposta = "";
 
         if (subcommand === 'hegel') {
-            resposta = "Hegel nos apresenta a Fenomenologia do Espírito como o caminho da consciência em direção ao Saber Absoluto. A dialética — tese, antítese e síntese — não é apenas um método, mas a própria estrutura da realidade em constante devir.";
+            resposta = "Hegel? Aquele papo de tese, antítese e síntese... mano, morguei desses assuntos. Não é pesado, só enjoei.";
         } else if (subcommand === 'intelectual') {
-            resposta = "Ser um intelectual exige mais do que acúmulo de dados; exige rigor metodológico e a coragem de submeter a realidade ao crivo da razão crítica. O intelectual é aquele que traduz o caos da experiência na ordem do pensamento.";
+            resposta = "Intelectual? Sei lá, os cara é um mistério. Eles pegam um assunto que sabem e só falam dele pra parecerem intelectuais como qualquer adolescente médio.";
         }
 
         await interaction.reply({ content: enrich(resposta) });

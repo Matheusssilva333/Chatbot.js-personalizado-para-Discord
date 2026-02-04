@@ -24,17 +24,17 @@ module.exports = {
             const user = interaction.options.getMember('usuario');
             const minutes = interaction.options.getInteger('tempo');
 
-            if (!user) return interaction.reply({ content: "Membro não encontrado nesta estrutura social.", ephemeral: true });
+            if (!user) return interaction.reply({ content: "Mano, cadê esse maluco? Achei não.", ephemeral: true });
 
-            await user.timeout(minutes * 60 * 1000, "Necessidade de reajuste comportamental sob análise da administração.");
-            await interaction.reply({ content: enrich(`O usuário ${user.user.tag} foi colocado em suspensão temporal por ${minutes} minutos para análise ética.`) });
+            await user.timeout(minutes * 60 * 1000, "Morguei dele, tomou timeout.");
+            await interaction.reply({ content: enrich(`O ${user.user.tag} foi de base por ${minutes} minutos. Tlg né.`) });
         } else if (subcommand === 'limpar') {
             const amount = interaction.options.getInteger('quantidade');
 
-            if (amount < 1 || amount > 100) return interaction.reply({ content: "A quantidade deve estar entre 1 e 100 por limitações técnicas.", ephemeral: true });
+            if (amount < 1 || amount > 100) return interaction.reply({ content: "Mano, bota um número entre 1 e 100 aí, não viaja.", ephemeral: true });
 
             await interaction.channel.bulkDelete(amount, true);
-            await interaction.reply({ content: enrich(`Foram removidas ${amount} instâncias de ruído informacional deste canal.`), ephemeral: true });
+            await interaction.reply({ content: enrich(`Mandei ${amount} mensagens pro ralo.`), ephemeral: true });
         }
     },
 };

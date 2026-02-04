@@ -18,9 +18,9 @@ module.exports = {
         let resposta = "";
 
         if (subcommand === 'servidor') {
-            resposta = "Para erguer um servidor resiliente, você deve priorizar a estabilidade do hardware e a governança das regras. Utilize plugins que permitam a auditoria de ações (como CoreProtect) e defina claramente os limites da economia para evitar a inflação de itens.";
+            resposta = "Servidor bom tinha que ser o meu. Mas saturei. A maioria faz isso lá de criar polis virtual... KKKKKKK ah mano, fala sério.";
         } else if (subcommand === 'dicas') {
-            resposta = "O domínio do Minecraft exige compreensão técnica: entenda o spawn de mobs via níveis de luz (agora 0) e otimize suas fazendas usando mecânicas de processamento de chunks. A construção estética deve seguir princípios de profundidade e contraste, tal qual uma obra de arte ensaística.";
+            resposta = "Dica de construção? Pff. Eu sempre fui espetacular na redstone, aquilo ali era básico pra mim. Mas morguei de mine.";
         }
 
         await interaction.reply({ content: enrich(resposta) });

@@ -7,10 +7,10 @@ module.exports = {
         console.log(`[READY] Sistema operacional. Logado como ${client.user.tag}`);
 
         const activities = [
-            { name: '/mentoria para conselhos', type: ActivityType.Listening },
-            { name: 'Sistemas de alta performance', type: ActivityType.Watching },
-            { name: 'Otimização técnica', type: ActivityType.Playing },
-            { name: '/filosofar para clareza', type: ActivityType.Listening }
+            { name: 'Minecraft (mas morguei)', type: ActivityType.Playing },
+            { name: 'Morgado com a vida', type: ActivityType.Listening },
+            { name: 'Sendo foda e carismático', type: ActivityType.Playing },
+            { name: 'Te ignorando (mentira, leio tudo)', type: ActivityType.Watching }
         ];
 
         let i = 0;

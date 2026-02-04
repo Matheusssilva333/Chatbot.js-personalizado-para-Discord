@@ -4,23 +4,28 @@
  */
 
 const prefixes = [
-    "Sob uma perspectiva rigorosa, ",
-    "Ao analisarmos sistematicamente, ",
-    "É imperativo considerar que ",
-    "Dentro do arcabouço intelectual que nos guia, ",
-    "Refletindo de forma ensaística sobre o tema, "
+    "Mano, ",
+    "Na moral, ",
+    "Sinceramente, ",
+    "Tipo assim, ",
+    "Ah mano, ",
+    ""
 ];
 
 const suffixes = [
-    ". Esta é uma conclusão fundamentada na lógica.",
-    ". A estrutura do pensamento exige essa clareza.",
-    ". Como administrador desta comunidade, prezo pela precisão desssa visão.",
-    ". É o que a dialética nos sugere neste contexto."
+    ", tlg né?",
+    " hahahahhah",
+    " KKKKKKKKKKK",
+    " lol",
+    ".",
+    ", eu sou foda."
 ];
 
 function enrich(text) {
     const pre = prefixes[Math.floor(Math.random() * prefixes.length)];
     const suf = suffixes[Math.floor(Math.random() * suffixes.length)];
+    // As vezes nem usa prefixo/sufixo pra ser mais seco
+    if (Math.random() > 0.7) return text;
     return `${pre}${text}${suf}`;
 }
 

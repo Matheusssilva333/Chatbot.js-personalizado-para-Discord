@@ -98,45 +98,51 @@ module.exports = {
             } else if (content.includes('seraf')) {
                 resposta = pick([
                     "Seraf? Ah mano, os cara lá... Eles pegam um assunto que sabem e só falam dele pra parecerem intelectuais como qualquer adolescente médio.",
-                    "É incrível que você sempre volta nisso 😭. Supera o Seraf, mano.",
+
                     "Seraf o Astuto... astuto em encher o saco com filosofia barata né. (pior q eu gosto dele)"
                 ]);
-            } else if (saudacoes.some(s => content.includes(s))) {
-                resposta = pick([
-                    "Ah mano. Fala.",
-                    "E aí. O que manda?",
-                    "Salve.",
-                    "Diga, humano."
-                ]);
-            } else if (content.includes('filosofia') || content.includes('pense') || content.includes('reflita')) {
-                resposta = pick([
-                    "Morguei desses assuntos. Não são ayanokoji como na sala branca.",
-                    "É incrível que você sempre volta nisso 😭. Filosofia pra quê?",
-                    "Pensar demais dá fome. Morguei."
-                ]);
-            } else {
-                // Resposta padrão (default) vinda do arquivo de contexto
-                resposta = getResponse('default');
+                if (content.includes('matheus')) {
+                    resposta = pick([
+                        "Mathes, Então tá bom ent, só seja vc mesmo e é isso",
+                        "matheus, ai se vc quiser vc arruma do seu jeito",
+                        "matheus, vc é um cara legal, só para de ser chato"
+                    ]);
+                } else if (saudacoes.some(s => content.includes(s))) {
+                    resposta = pick([
+                        "Ah mano. Fala.",
+                        "E aí. O que manda?",
+                        "Salve.",
+                        "Diga, humano."
+                    ]);
+                } else if (content.includes('filosofia') || content.includes('pense') || content.includes('reflita')) {
+                    resposta = pick([
+                        "Morguei desses assuntos. Não são ayanokoji como na sala branca.",
+                        "É incrível que você sempre volta nisso 😭. Filosofia pra quê?",
+                        "Pensar demais dá fome. Morguei."
+                    ]);
+                } else {
+                    // Resposta padrão (default) vinda do arquivo de contexto
+                    resposta = getResponse('default');
+                }
+
+                // Enriquece a resposta com gírias/sufixos aleatórios (20% de chance de NÃO enriquecer pra variar)
+                const respostaFinal = Math.random() > 0.2 ? enrich(resposta) : resposta;
+
+                try {
+                    await message.channel.sendTyping();
+                    const delay = Math.min(1000 + (respostaFinal.length * 2), 2000);
+
+                    setTimeout(async () => {
+                        if (isDM) {
+                            await message.channel.send(respostaFinal);
+                        } else {
+                            await message.reply({ content: respostaFinal, failIfNotExists: false });
+                        }
+                    }, delay);
+
+                } catch (error) {
+                    console.error('[ERRO] Falha ao enviar resposta:', error);
+                }
             }
-
-            // Enriquece a resposta com gírias/sufixos aleatórios (20% de chance de NÃO enriquecer pra variar)
-            const respostaFinal = Math.random() > 0.2 ? enrich(resposta) : resposta;
-
-            try {
-                await message.channel.sendTyping();
-                const delay = Math.min(1000 + (respostaFinal.length * 2), 2000);
-
-                setTimeout(async () => {
-                    if (isDM) {
-                        await message.channel.send(respostaFinal);
-                    } else {
-                        await message.reply({ content: respostaFinal, failIfNotExists: false });
-                    }
-                }, delay);
-
-            } catch (error) {
-                console.error('[ERRO] Falha ao enviar resposta:', error);
-            }
-        }
-    },
-};
+        },
+    };

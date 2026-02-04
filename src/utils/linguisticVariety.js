@@ -18,7 +18,11 @@ const suffixes = [
     " KKKKKKKKKKK",
     " lol",
     ".",
-    ", eu sou foda."
+    ", eu sou foda.",
+    ", o que tu acha?",
+    ", fala aí.",
+    ", ou to viajando?",
+    " né mano?"
 ];
 
 function enrich(text) {

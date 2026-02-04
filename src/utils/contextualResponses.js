@@ -19,6 +19,16 @@ const responses = {
         "Aquilo ali que eu fazia antigamente era coisa básica, pra mim era nada.",
         "Eu sou foda no xadrez, mas morguei de jogar.",
         "Xadrez é lógica, e eu sou um lógico fodido."
+    ],
+    enigma: [
+        "Não é português isso. É um ciclo matemático infinito.",
+        "Tentei substituir a posição de cada letra do alfabeto... e nada.",
+        "Seria bom saber se vc tá dando dica ou falando aleatoriamente."
+    ],
+    sono: [
+        "Ah, é o sono! Meus músculos não desligam.",
+        "Só fico acordado que nem louco pq tem coisinhas loucas a serem feitas.",
+        "Enquanto eu olhar pra tela do celular, eu não tenho mini sonhos."
     ]
 };
 

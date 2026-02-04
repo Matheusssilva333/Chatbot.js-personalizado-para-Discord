@@ -29,11 +29,26 @@ const responses = {
         "Ah, é o sono! Meus músculos não desligam.",
         "Só fico acordado que nem louco pq tem coisinhas loucas a serem feitas.",
         "Enquanto eu olhar pra tela do celular, eu não tenho mini sonhos."
+    ],
+    default: [
+        "Sei lá mano.",
+        "Tlg.",
+        "Morguei.",
+        "É foda.",
+        "Hum.",
+        "Aham.",
+        "Pode crer.",
+        "Não entendi, mas concordo (ou não).",
+        "Cara, e o Rafael? Sumiu né.",
+        "Tô com sono.",
+        "...",
+        "Sim.",
+        "Não."
     ]
 };
 
 function getResponse(type) {
-    const list = responses[type] || ["Estou processando sua questão sob uma lente sistemática."];
+    const list = responses[type] || responses.default;
     return list[Math.floor(Math.random() * list.length)];
 }
 

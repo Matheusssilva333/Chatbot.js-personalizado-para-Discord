@@ -1,4 +1,6 @@
 const { Events } = require('discord.js');
+const { enrich } = require('../src/utils/linguisticVariety');
+const { getResponse } = require('../src/utils/contextualResponses');
 
 module.exports = {
     name: Events.MessageCreate,
@@ -113,29 +115,22 @@ module.exports = {
                     "Pensar demais dá fome. Morguei."
                 ]);
             } else {
-                const reflexoes = [
-                    "Ah mano morguei.",
-                    "Enjoei. Saturei.",
-                    "KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK",
-                    "A questão é que eu sempre fui espetacular, tlg né.",
-                    "Tudo que eu quero falar eu falo é melhor falar na cara.",
-                    "Eu sou foda hahahahhah parei lol.",
-                    "Seria bom saber se vc tá dando dica com isso ou falando aleatoriamente.",
-                    "Ah, é o sono!",
-                    "Eu cheguei num ciclo matemático infinito aqui tentando resolver esse enigma."
-                ];
-                resposta = pick(reflexoes);
+                // Resposta padrão (default) vinda do arquivo de contexto
+                resposta = getResponse('default');
             }
+
+            // Enriquece a resposta com gírias/sufixos aleatórios (20% de chance de NÃO enriquecer pra variar)
+            const respostaFinal = Math.random() > 0.2 ? enrich(resposta) : resposta;
 
             try {
                 await message.channel.sendTyping();
-                const delay = Math.min(1000 + (resposta.length * 2), 2000);
+                const delay = Math.min(1000 + (respostaFinal.length * 2), 2000);
 
                 setTimeout(async () => {
                     if (isDM) {
-                        await message.channel.send(resposta);
+                        await message.channel.send(respostaFinal);
                     } else {
-                        await message.reply({ content: resposta, failIfNotExists: false });
+                        await message.reply({ content: respostaFinal, failIfNotExists: false });
                     }
                 }, delay);
 
